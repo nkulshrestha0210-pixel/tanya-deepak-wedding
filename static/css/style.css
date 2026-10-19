@@ -276,3 +276,13 @@ body.transition-thread .transition-ornament{animation:threadPull .62s cubic-bezi
 .envelope-letter img{display:block;width:min(150px,68%);height:100%;object-fit:contain;filter:drop-shadow(0 2px 5px #10020755);opacity:.98;}
 .envelope-opening .envelope-letter img{animation:envelopeMonogramReveal .75s .12s both;}
 @keyframes envelopeMonogramReveal{from{opacity:.2;transform:translateY(14px) scale(.82)}to{opacity:1;transform:translateY(0) scale(1)}}
+
+/* Real pull interaction: the rope follows a downward drag and only navigates after a deliberate pull. */
+.grandparents-rope{touch-action:pan-y;user-select:none;-webkit-user-select:none;cursor:grab;}
+.grandparents-rope .rope-emblem{transform:translateY(var(--rope-pull,0px));transition:transform .12s ease-out;}
+.grandparents-rope.rope-being-pulled{cursor:grabbing;box-shadow:0 14px 28px #4a101c30;}
+.grandparents-rope.rope-being-pulled .rope-emblem{transition:none;}
+.grandparents-rope.rope-pull-complete{animation:ropeRelease .24s ease-out;}
+.grandparents-rope.rope-pull-return .rope-emblem{transition:transform .25s cubic-bezier(.2,.8,.2,1);}
+@keyframes ropeRelease{50%{transform:translateY(5px) scale(.98)}100%{transform:translateY(0) scale(1)}}
+@media(prefers-reduced-motion:reduce){.grandparents-rope.rope-pull-complete{animation:none}}

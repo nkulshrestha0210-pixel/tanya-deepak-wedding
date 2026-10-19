@@ -8,6 +8,49 @@ document.addEventListener("DOMContentLoaded", () => {
   };
   const playMusic = async () => { if (!audio) return; try { audio.volume = 0.42; await audio.play(); setMusicUI(true); } catch (_) { setMusicUI(false); if (musicStatus) musicStatus.textContent = "Tap Play Din Shagna Da to start"; } };
   if (audio) { audio.loop = true; audio.addEventListener("play", () => setMusicUI(true)); audio.addEventListener("pause", () => setMusicUI(false)); audio.addEventListener("error", () => { if (musicStatus) musicStatus.textContent = "Music could not load — check the audio file"; }); }
+  // Pull-to-navigate rope: dragging the golden thread down opens the next page.
+  let ropeDrag = null;
+  document.addEventListener("pointerdown", (e) => {
+    const rope = e.target.closest(".grandparents-rope");
+    if (!rope || e.button !== 0) return;
+    ropeDrag = { rope, startY: e.clientY, pointerId: e.pointerId, moved: false };
+    rope.classList.add("rope-being-pulled");
+    try { rope.setPointerCapture(e.pointerId); } catch (_) {}
+  });
+  document.addEventListener("pointermove", (e) => {
+    if (!ropeDrag || e.pointerId !== ropeDrag.pointerId) return;
+    const delta = Math.max(0, Math.min(95, e.clientY - ropeDrag.startY));
+    if (delta > 4) ropeDrag.moved = true;
+    ropeDrag.rope.style.setProperty("--rope-pull", `${delta}px`);
+  });
+  document.addEventListener("pointerup", (e) => {
+    if (!ropeDrag || e.pointerId !== ropeDrag.pointerId) return;
+    const { rope, startY } = ropeDrag;
+    const distance = e.clientY - startY;
+    const dragged = ropeDrag.moved;
+    rope.classList.remove("rope-being-pulled");
+    ropeDrag = null;
+    if (dragged && distance >= 48) {
+      rope.classList.add("rope-pull-complete");
+      rope.dataset.pullConfirmed = "true";
+      setTimeout(() => { rope.click(); }, 120);
+    } else {
+      rope.style.setProperty("--rope-pull", "0px");
+      if (dragged) rope.classList.add("rope-pull-return");
+      setTimeout(() => rope.classList.remove("rope-pull-return"), 280);
+    }
+  });
+  document.addEventListener("pointercancel", () => {
+    if (ropeDrag) { ropeDrag.rope.classList.remove("rope-being-pulled"); ropeDrag.rope.style.setProperty("--rope-pull", "0px"); ropeDrag = null; }
+  });
+  document.addEventListener("click", (e) => {
+    const rope = e.target.closest(".grandparents-rope");
+    if (!rope) return;
+    if (rope.dataset.pullConfirmed === "true") { delete rope.dataset.pullConfirmed; return; }
+    // A tap is deliberately not enough; the guest must physically pull the thread.
+    e.preventDefault();
+  }, true);
+
   // Event delegation means the music control and envelope continue to work after in-page transitions.
   document.addEventListener("click", async (e) => {
     const toggle = e.target.closest("#music-toggle");
