@@ -11,7 +11,7 @@
     <img class="home-monogram" src="{{ url_for('static', filename='images/td-logo.png') }}" alt="Tanya and Deepak gold monogram">
     <div class="envelope-stage">
       <button class="envelope" id="open-envelope" type="button" aria-label="Open wedding invitation and start music">
-        <span class="envelope-letter">T <i>&amp;</i> D</span>
+        <span class="envelope-letter"><img src="{{ url_for('static', filename='images/td-monogram.png') }}" alt="Tanya and Deepak monogram"></span>
         <span class="envelope-body" aria-hidden="true"></span>
         <span class="envelope-flap" aria-hidden="true"></span>
         <span class="envelope-seal" aria-hidden="true">✦</span>
@@ -20,7 +20,6 @@
     <p class="microcopy" id="envelope-hint">Tap the envelope to open your invitation and hear the music</p>
     <p class="couple-names">{{ wedding.bride }} <span>&amp;</span> {{ wedding.groom }}</p>
     <p class="hero-date">{{ wedding.date_display }} <span>·</span> Agra</p>
-    <a class="button button-gold" id="view-invitation" href="{{ url_for('invitation') }}">View Invitation</a>
   </div>
 </section>
 <section class="countdown-section reveal-on-scroll" aria-label="Countdown to the wedding">
@@ -36,6 +35,7 @@
 <section class="section section-maroon">
   <div class="section-inner centered">
     <p class="eyebrow">Wedding celebrations</p><h2>Join Our Celebrations</h2>
+    <a class="button button-gold invitation-below-celebrations" id="view-invitation" href="{{ url_for('invitation') }}">View Invitation</a>
     <div class="event-teasers">
       {% for key in ["mehendi", "sangeet", "haldi", "wedding"] %}
       <a class="event-teaser" href="{{ url_for('event_page', event_key=key) }}">

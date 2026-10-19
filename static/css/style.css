@@ -267,3 +267,12 @@ body.transition-thread .transition-ornament{animation:threadPull .62s cubic-bezi
 .grandparents-rope:active{transform:translateY(3px) scale(.98)}
 .rope-instruction{width:100%;margin:0;color:#755a3c;font-size:.82rem;letter-spacing:.06em}
 @media(prefers-reduced-motion:reduce){.grandparents-rope,.grandparents-rope .rope-arrow{transition:none}}
+
+
+/* Invitation button is grouped with the celebration links on the welcome page. */
+.invitation-below-celebrations{margin:0 auto 8px;}
+/* The envelope reveals the gold T&D monogram instead of plain initials. */
+.envelope-letter{display:flex;align-items:center;justify-content:center;top:8%;height:82%;padding:8px;pointer-events:none;}
+.envelope-letter img{display:block;width:min(150px,68%);height:100%;object-fit:contain;filter:drop-shadow(0 2px 5px #10020755);opacity:.98;}
+.envelope-opening .envelope-letter img{animation:envelopeMonogramReveal .75s .12s both;}
+@keyframes envelopeMonogramReveal{from{opacity:.2;transform:translateY(14px) scale(.82)}to{opacity:1;transform:translateY(0) scale(1)}}
