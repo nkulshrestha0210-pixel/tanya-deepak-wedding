@@ -1,0 +1,1 @@
+Wedding instrumental: wedding-music.mp3. One persistent audio element is kept alive while in-site pages transition, so the song does not restart between slides/pages. Playback starts after the guest taps the envelope or Play button, due to browser autoplay restrictions.

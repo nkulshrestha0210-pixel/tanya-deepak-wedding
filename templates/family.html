@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="page-hero"><p class="eyebrow">Two families, one celebration</p><h1>Our <em>Families</em></h1><p class="hero-copy">With gratitude for the love and blessings that brought us here.</p></section>
+<section class="section section-ivory"><div class="section-inner">
+  <div class="family-columns">
+    <article class="family-panel"><p class="eyebrow eyebrow-dark">Bride's family</p><h2>The Kulshrestha Family</h2>
+      <h3>Parents</h3><p>{{ family.bride_mother }}<br>{{ family.bride_father }}</p>
+      <h3>Paternal grandparents</h3><p>{{ family.bride_paternal_grandparents }}</p>
+      <h3>Maternal grandparents</h3><p>{{ family.bride_maternal_grandparents }}</p>
+    </article>
+    <article class="family-panel"><p class="eyebrow eyebrow-dark">Groom's family</p><h2>The Bansal Family</h2>
+      <h3>Parents</h3><p>{{ family.groom_mother }}<br>{{ family.groom_father }}</p>
+      <h3>Paternal grandparents</h3><p>{{ family.groom_paternal_grandparents }}</p>
+      <h3>Maternal grandparents</h3><p>{{ family.groom_maternal_grandparents }}</p>
+    </article>
+  </div>
+  <p class="edit-note">Family details are managed centrally in <code>config.py</code>. Please review spellings and placeholders before publishing.</p>
+</div></section>
+{% endblock %}

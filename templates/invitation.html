@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="page-hero compact-hero"><p class="eyebrow">॥ श्री गणेशाय नमः ॥</p><h1>The Wedding <em>Invitation</em></h1><p class="hero-copy">With love, joy and blessings</p></section>
+<section class="section section-ivory">
+  <article class="invitation-card">
+    <div class="card-ornament" aria-hidden="true">✦ ❧ ✦</div>
+    <p class="eyebrow eyebrow-dark">{{ wedding.hosts }}</p>
+    <h2>{{ wedding.bride }} <em>&amp;</em> {{ wedding.groom }}</h2>
+    <div class="gold-rule"></div>
+    <p class="invitation-copy">{{ wedding.invitation_text }}</p>
+    <p class="invitation-date">{{ wedding.date_display }}</p>
+    <p class="invitation-venue">{{ wedding.venue_name }}<br><small>{{ wedding.venue_address }}</small></p>
+    <div class="card-ornament" aria-hidden="true">❧ ✦ ❧</div>
+  </article>
+  <div class="section-inner centered page-cta"><a class="button button-maroon" href="{{ url_for('bride') }}">Meet the Couple →</a></div>
+</section>
+{% endblock %}

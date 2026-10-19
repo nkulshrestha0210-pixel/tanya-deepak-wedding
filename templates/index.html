@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="hero hero-home">
+  <div class="hero-frame">
+    <img class="ganpati-image" src="{{ url_for('static', filename='images/ganpati.png') }}" alt="Lord Ganesha">
+    <p class="ganesh-invocation">॥ श्री गणेशाय नमः ॥</p>
+    <div class="gold-divider" aria-hidden="true">✦</div>
+    <p class="eyebrow">Together with their families</p>
+    <h1>A Royal Celebration <em>of Love</em></h1>
+    <p class="hero-copy">With the blessings of Lord Ganesha, we cordially invite you to celebrate the wedding of</p>
+    <img class="home-monogram" src="{{ url_for('static', filename='images/td-logo.png') }}" alt="Tanya and Deepak gold monogram">
+    <div class="envelope-stage">
+      <button class="envelope" id="open-envelope" type="button" aria-label="Open wedding invitation and start music">
+        <span class="envelope-letter">T <i>&amp;</i> D</span>
+        <span class="envelope-body" aria-hidden="true"></span>
+        <span class="envelope-flap" aria-hidden="true"></span>
+        <span class="envelope-seal" aria-hidden="true">✦</span>
+      </button>
+    </div>
+    <p class="microcopy" id="envelope-hint">Tap the envelope to open your invitation and hear the music</p>
+    <p class="couple-names">{{ wedding.bride }} <span>&amp;</span> {{ wedding.groom }}</p>
+    <p class="hero-date">{{ wedding.date_display }} <span>·</span> Agra</p>
+    <a class="button button-gold" id="view-invitation" href="{{ url_for('invitation') }}">View Invitation</a>
+  </div>
+</section>
+<section class="countdown-section reveal-on-scroll" aria-label="Countdown to the wedding">
+  <p class="eyebrow">The celebrations begin soon</p>
+  <h2>Counting Down to the Wedding</h2>
+  <div class="countdown" data-countdown="2027-02-10T00:00:00+05:30">
+    <div><strong data-unit="days">—</strong><span>Days</span></div>
+    <div><strong data-unit="hours">—</strong><span>Hours</span></div>
+    <div><strong data-unit="minutes">—</strong><span>Minutes</span></div>
+    <div><strong data-unit="seconds">—</strong><span>Seconds</span></div>
+  </div>
+</section>
+<section class="section section-maroon">
+  <div class="section-inner centered">
+    <p class="eyebrow">Wedding celebrations</p><h2>Join Our Celebrations</h2>
+    <div class="event-teasers">
+      {% for key in ["mehendi", "sangeet", "haldi", "wedding"] %}
+      <a class="event-teaser" href="{{ url_for('event_page', event_key=key) }}">
+        <img class="teaser-logo" src="{{ url_for('static', filename='images/td-logo.png') }}" alt="">
+        <span><strong>{{ events[key].title }}</strong><small>{{ events[key].date_display }}</small></span>
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endblock %}

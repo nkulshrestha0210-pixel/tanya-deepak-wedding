@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#4A101C">
+  <meta name="description" content="A royal Indian wedding invitation celebrating Tanya and Deepak, 10 February 2027.">
+  <title>{{ page_title }} · Tanya &amp; Deepak</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  {% block head %}{% endblock %}
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to content</a>
+<header class="site-header">
+  <a class="brand" href="{{ url_for('home') }}" aria-label="Tanya and Deepak wedding home">
+    <img class="brand-logo" src="{{ url_for('static', filename='images/td-logo.png') }}" alt="Tanya and Deepak monogram">
+    <span class="brand-name">Tanya <i>&amp;</i> Deepak</span>
+  </a>
+  <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="primary-nav">Menu <span aria-hidden="true">☰</span></button>
+  <nav id="primary-nav" class="primary-nav" aria-label="Main navigation">
+    {% for key, label, endpoint in page_sequence %}
+      {% if key == "home" %}
+        {% set target = url_for("home") %}
+      {% elif key in ["mehendi", "sangeet", "haldi"] %}
+        {% set target = url_for("event_page", event_key=key) %}
+      {% elif key == "wedding" %}
+        {% set target = url_for("wedding_page") %}
+      {% else %}
+        {% set target = url_for(endpoint) %}
+      {% endif %}
+      <a href="{{ target }}" {% if page_key == key %}aria-current="page"{% endif %}>{{ label }}</a>
+    {% endfor %}
+  </nav>
+</header>
+<main id="main-content">
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      <div class="flash-wrap" role="status" aria-live="polite">
+      {% for category, message in messages %}
+        <p class="flash flash-{{ category }}">{{ message }}</p>
+      {% endfor %}
+      </div>
+    {% endif %}
+  {% endwith %}
+  {% block content %}{% endblock %}
+  {% if page_key in page_urls %}
+    {% set ns = namespace(index=0) %}
+    {% for item in page_sequence %}
+      {% if item[0] == page_key %}{% set ns.index = loop.index0 %}{% endif %}
+    {% endfor %}
+    <nav class="page-turn" aria-label="Previous and next pages">
+      {% if ns.index > 0 %}
+        {% set previous_item = page_sequence[ns.index - 1] %}
+        <a href="{{ page_urls[previous_item[0]] }}"><span aria-hidden="true">←</span> {{ previous_item[1] }}</a>
+      {% else %}<span></span>{% endif %}
+      <span class="page-turn-count">{{ ns.index + 1 }} / {{ page_sequence|length }}</span>
+      {% if ns.index + 1 < page_sequence|length %}
+        {% set next_item = page_sequence[ns.index + 1] %}
+        <a href="{{ page_urls[next_item[0]] }}">{{ next_item[1] }} <span aria-hidden="true">→</span></a>
+      {% else %}<span></span>{% endif %}
+    </nav>
+  {% endif %}
+</main>
+<footer class="site-footer">
+  <div class="music-player" aria-label="Din Shagna Da instrumental">
+    <button class="music-toggle" type="button" id="music-toggle" aria-pressed="false">♫ Play Din Shagna Da</button>
+    <span class="music-note" id="music-status" aria-live="polite">Din Shagna Da · tap to play</span>
+  </div>
+  <div class="footer-ornament" aria-hidden="true">✦ ❧ ✦</div>
+  <p>{{ wedding.closing }}</p>
+  <p class="footer-names">{{ wedding.bride }} <span>&amp;</span> {{ wedding.groom }}</p>
+  <p class="footer-date">{{ wedding.date_display }}</p>
+  <div class="footer-links">
+    <a href="{{ url_for('home') }}">Home</a><a href="{{ url_for('venue') }}">Venue</a><a href="{{ url_for('rsvp') }}">RSVP</a>
+  </div>
+</footer>
+
+<audio id="wedding-music" preload="auto" playsinline loop src="{{ url_for('static', filename=wedding.music_file) }}"></audio>
+<script src="{{ url_for('static', filename='js/main.js') }}" defer></script>
+{% block scripts %}{% endblock %}
+</body>
+</html>
