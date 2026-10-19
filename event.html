@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="event-hero event-hero-{{ event.theme }}">
+  <div class="event-hero-inner"><p class="eyebrow">The wedding celebrations</p><div class="event-emblem" aria-hidden="true">{% if event.theme == "sangeet" %}♫{% elif event.theme == "mehendi" %}❧{% elif event.theme == "haldi" %}✿{% else %}✦{% endif %}</div>
+  <h1>{{ event.title }}{% if page_key == "wedding" %}<br><em>ceremony</em>{% endif %}</h1><p class="hero-copy">{{ event.description }}</p></div>
+</section>
+<section class="section section-ivory"><div class="event-detail-card">
+  <p class="eyebrow eyebrow-dark">Save the date</p><h2>{{ event.date_display }}</h2>
+  <div class="gold-rule"></div>
+  <div class="detail-list">
+    <div><span class="detail-icon">◷</span><span><small>Time</small><strong>{{ event.time }}</strong></span></div>
+    <div><span class="detail-icon">⌖</span><span><small>Venue</small><strong>{{ event.venue }}</strong><span>{{ event.address }}</span></span></div>
+    {% if event.dress_code %}<div><span class="detail-icon">✧</span><span><small>Dress code</small><strong>{{ event.dress_code }}</strong></span></div>{% endif %}
+  </div>
+  {% if event.maps_url %}
+    <a class="button button-maroon" href="{{ event.maps_url }}" target="_blank" rel="noopener noreferrer">Get Directions ↗</a>
+  {% elif event.address and "confirmed" not in event.address|lower and page_key != "reception" %}
+    <a class="button button-maroon" href="{{ url_for('venue') }}">Venue &amp; Directions →</a>
+  {% endif %}
+</div></section>
+{% endblock %}

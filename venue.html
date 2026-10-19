@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="page-hero"><p class="eyebrow">Plan your visit</p><h1>Venue &amp; <em>Guest Information</em></h1><p class="hero-copy">We look forward to welcoming you in Agra.</p></section>
+<section class="section section-ivory"><div class="section-inner venue-layout">
+  <article class="venue-card"><p class="eyebrow eyebrow-dark">Wedding venue</p><h2>{{ wedding.venue_name }}</h2><p>{{ wedding.venue_address }}</p>
+    {% if wedding.maps_url %}<a class="button button-maroon" href="{{ wedding.maps_url }}" target="_blank" rel="noopener noreferrer">Open Google Maps ↗</a>{% else %}<p class="edit-note">Map link will be added after the venue is confirmed.</p>{% endif %}
+  </article>
+  <article class="venue-card venue-card-dark"><p class="eyebrow">Guest assistance</p><h2>Need a hand?</h2>
+    {% if wedding.contact_name or wedding.contact_phone %}<p>{{ wedding.contact_name }}{% if wedding.contact_phone %}<br>{{ wedding.contact_phone }}{% endif %}</p>{% else %}<p>Guest assistance contact details have not yet been provided.</p>{% endif %}
+    <p class="edit-note">Parking, accommodation and travel details will be added when confirmed.</p>
+    <a class="button button-gold" href="{{ url_for('rsvp') }}">RSVP →</a>
+  </article>
+</div></section>
+{% endblock %}

@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="page-hero"><p class="eyebrow">Kindly respond</p><h1>RSVP &amp; <em>Warm Wishes</em></h1><p class="hero-copy">Help us prepare to welcome you.</p></section>
+<section class="section section-ivory"><div class="rsvp-layout">
+  <div class="rsvp-copy"><p class="eyebrow eyebrow-dark">A special invite</p><h2>{{ special_invite.heading }}</h2><p>{{ special_invite.message }}</p><p class="signature">From: {{ special_invite.from }}</p>
+    <div class="invitee-lists"><h3>Family invitations</h3>
+      <p><strong>RSVP group</strong></p><ul>{% for person in rsvp_groups %}<li>{{ person }}</li>{% endfor %}</ul>
+      <p><strong>WBCF group</strong></p><ul>{% for person in wbcf_groups %}<li>{{ person }}</li>{% endfor %}</ul>
+    </div>
+  </div>
+  <form class="rsvp-form" method="post" action="{{ url_for('rsvp') }}">
+    <h2>Will you join us?</h2>
+    <p class="muted">Fields marked * are required.</p>
+    <label for="invitee_group">Invitation group *</label>
+    <select id="invitee_group" name="invitee_group" required>
+      <option value="">Select your group</option>
+      <optgroup label="RSVP group">{% for group in rsvp_groups %}<option value="{{ group }}" {% if form_values.get('invitee_group') == group %}selected{% endif %}>{{ group }}</option>{% endfor %}</optgroup>
+      <optgroup label="WBCF group">{% for group in wbcf_groups %}<option value="{{ group }}" {% if form_values.get('invitee_group') == group %}selected{% endif %}>{{ group }}</option>{% endfor %}</optgroup>
+      <option value="Special invite" {% if form_values.get('invitee_group') == 'Special invite' %}selected{% endif %}>Special invite</option>
+      <option value="Other / not listed" {% if form_values.get('invitee_group') == 'Other / not listed' %}selected{% endif %}>Other / not listed</option>
+    </select>
+    <fieldset><legend>Can you attend? *</legend>
+      <label class="radio-label"><input type="radio" name="attendance" value="yes" required {% if form_values.get('attendance') == 'yes' %}checked{% endif %}> Yes, I'll be there</label>
+      <label class="radio-label"><input type="radio" name="attendance" value="no" required {% if form_values.get('attendance') == 'no' %}checked{% endif %}> No, I can't attend</label>
+    </fieldset>
+    <label for="message">Optional message</label>
+    <textarea id="message" name="message" rows="4" maxlength="1000" placeholder="Send Tanya and Deepak your wishes…">{{ form_values.get('message', '') }}</textarea>
+    <button class="button button-maroon button-full" type="submit">Submit RSVP Form</button>
+    <p class="form-note">Demo mode: this form validates your response but does not save it permanently. Please use WhatsApp or contact the hosts for a real RSVP.</p>
+    {% if whatsapp_url %}<a class="button button-whatsapp button-full" href="{{ whatsapp_url }}" target="_blank" rel="noopener noreferrer">RSVP on WhatsApp ↗</a>{% else %}<p class="form-note">WhatsApp RSVP will appear after a number is added in <code>config.py</code>.</p>{% endif %}
+  </form>
+</div>
+<div class="closing-card"><div class="card-ornament">✦ ❧ ✦</div><p>{{ wedding.closing }}</p><strong>{{ wedding.bride }} &amp; {{ wedding.groom }}</strong></div>
+</section>
+{% endblock %}

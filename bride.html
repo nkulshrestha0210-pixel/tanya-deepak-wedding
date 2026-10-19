@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="page-hero"><p class="eyebrow">The bride</p><h1>Meet <em>{{ wedding.bride }}</em></h1><p class="hero-copy">A heart full of grace, a future full of promise.</p></section>
+<section class="section section-ivory"><div class="profile-layout">
+  <div class="portrait-placeholder bride-portrait-wrap"><img class="bride-portrait" src="{{ url_for('static', filename='images/tanya-portrait.png') }}" alt="Tanya in a pink embroidered traditional outfit"></div>
+  <div class="profile-copy"><p class="eyebrow eyebrow-dark">With love and blessings</p><h2>{{ wedding.bride }}</h2>
+    <p>Beloved daughter of {{ family.bride_mother }} and {{ family.bride_father }}.</p>
+    {% if family.bride_intro %}<p>{{ family.bride_intro }}</p>{% else %}<p class="muted">A short introduction can be added in <code>config.py</code>.</p>{% endif %}
+    <blockquote>{{ family.family_blessings }}</blockquote>
+    <a class="button button-maroon" href="{{ url_for('groom') }}">Meet Deepak →</a>
+  </div>
+</div></section>
+{% endblock %}
