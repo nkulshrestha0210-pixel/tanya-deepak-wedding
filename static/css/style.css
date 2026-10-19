@@ -254,3 +254,16 @@ body.transition-thread .transition-ornament{animation:threadPull .62s cubic-bezi
 .bride-portrait-wrap{overflow:hidden;padding:0;background:#3b1522}
 .bride-portrait{display:block;width:100%;height:100%;min-height:380px;object-fit:cover;object-position:center 38%;border-radius:inherit}
 @media(max-width:700px){.bride-portrait{min-height:330px}}
+
+/* Golden pull-rope navigation on the family / grandparents page */
+.grandparents-rope-wrap{display:flex;justify-content:center;align-items:center;gap:18px;flex-wrap:wrap;padding:34px 18px 42px;background:linear-gradient(180deg,#fffaf0,#f4e7ce);border-top:1px solid #c6a15d55;text-align:center}
+.grandparents-rope{position:relative;display:inline-flex;align-items:center;gap:13px;min-height:62px;padding:12px 22px 12px 18px;border:1px solid #b88f4b;border-radius:999px;background:linear-gradient(135deg,#fff8e8,#ead3a0);color:#4a101c;text-decoration:none;box-shadow:0 7px 20px #4a101c18;font-family:Georgia,serif;font-weight:600;letter-spacing:.025em;transition:transform .25s ease,box-shadow .25s ease;}
+.grandparents-rope:hover,.grandparents-rope:focus-visible{transform:translateY(-3px);box-shadow:0 12px 25px #4a101c2b;outline:2px solid #b88f4b;outline-offset:3px}
+.rope-emblem{position:relative;display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;flex:0 0 34px;border-radius:50%;border:1px solid #b88f4b;background:#4a101c;color:#f6df9d;font-size:1.15rem}
+.rope-emblem:before{content:"";position:absolute;width:3px;height:25px;left:50%;bottom:28px;transform:translateX(-50%);background:repeating-linear-gradient(0deg,#b88f4b 0 3px,#f6df9d 3px 5px);border-radius:3px}
+.rope-emblem:after{content:"";position:absolute;width:12px;height:8px;left:50%;bottom:49px;transform:translateX(-50%);border:2px solid #b88f4b;border-bottom:0;border-radius:10px 10px 0 0}
+.grandparents-rope .rope-arrow{font-size:1.35rem;color:#946b27;transition:transform .25s ease}
+.grandparents-rope:hover .rope-arrow{transform:translateX(4px)}
+.grandparents-rope:active{transform:translateY(3px) scale(.98)}
+.rope-instruction{width:100%;margin:0;color:#755a3c;font-size:.82rem;letter-spacing:.06em}
+@media(prefers-reduced-motion:reduce){.grandparents-rope,.grandparents-rope .rope-arrow{transition:none}}

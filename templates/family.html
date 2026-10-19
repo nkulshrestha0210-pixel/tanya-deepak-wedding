@@ -14,6 +14,13 @@
       <h3>Maternal grandparents</h3><p>{{ family.groom_maternal_grandparents }}</p>
     </article>
   </div>
-  <p class="edit-note">Family details are managed centrally in <code>config.py</code>. Please review spellings and placeholders before publishing.</p>
 </div></section>
+<section class="grandparents-rope-wrap" aria-label="Continue to the wedding celebrations">
+  <p class="rope-instruction">When you are ready, pull the golden thread to continue</p>
+  <a class="grandparents-rope page-turn-thread" href="{{ url_for('event_page', event_key='mehendi') }}" aria-label="Pull the golden thread to continue to Mehendi">
+    <span class="rope-emblem" aria-hidden="true">✦</span>
+    <span>Pull the golden thread</span>
+    <span class="rope-arrow" aria-hidden="true">→</span>
+  </a>
+</section>
 {% endblock %}

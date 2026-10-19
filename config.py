@@ -89,7 +89,7 @@ EVENTS = {
         "title": "Wedding Ceremony",
         "date": date(2027, 2, 10),
         "date_display": "10 February 2027",
-        "time": "Baraat Welcome: 8:00 PM onwards · Dinner: 8:00 PM onwards",
+        "time": "8 PM onwards",
         "venue": "The Keyaan Saloni",
         "address": "Fatehabad Rd, Kalal Kheria, Agra, Uttar Pradesh 282006",
         "description": "The sacred beginning of a beautiful forever.",

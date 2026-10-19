@@ -5,7 +5,7 @@
   <div class="groom-portrait-wrap"><img class="groom-portrait" src="{{ url_for('static', filename='images/deepak-portrait.jpg') }}" alt="Deepak wearing an ivory embroidered sherwani"></div>
   <div class="profile-copy"><p class="eyebrow eyebrow-dark">With love and blessings</p><h2>{{ wedding.groom }}</h2>
     <p>Beloved son of {{ family.groom_mother }} and {{ family.groom_father }}.</p>
-    {% if family.groom_intro %}<p>{{ family.groom_intro }}</p>{% else %}<p class="muted">A short introduction can be added in <code>config.py</code>.</p>{% endif %}
+    {% if family.groom_intro %}<p>{{ family.groom_intro }}</p>{% endif %}
     <blockquote>{{ family.family_blessings }}</blockquote>
     <a class="button button-maroon" href="{{ url_for('family_page') }}">Meet Our Families →</a>
   </div>

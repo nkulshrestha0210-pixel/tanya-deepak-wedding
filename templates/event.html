@@ -2,7 +2,7 @@
 {% block content %}
 <section class="event-hero event-hero-{{ event.theme }}">
   <div class="event-hero-inner"><p class="eyebrow">The wedding celebrations</p><div class="event-emblem" aria-hidden="true">{% if event.theme == "sangeet" %}♫{% elif event.theme == "mehendi" %}❧{% elif event.theme == "haldi" %}✿{% else %}✦{% endif %}</div>
-  <h1>{{ event.title }}{% if page_key == "wedding" %}<br><em>ceremony</em>{% endif %}</h1><p class="hero-copy">{{ event.description }}</p></div>
+  <h1>{{ event.title }}</h1><p class="hero-copy">{{ event.description }}</p></div>
 </section>
 <section class="section section-ivory"><div class="event-detail-card">
   <p class="eyebrow eyebrow-dark">Save the date</p><h2>{{ event.date_display }}</h2>
@@ -18,4 +18,24 @@
     <a class="button button-maroon" href="{{ url_for('venue') }}">Venue &amp; Directions →</a>
   {% endif %}
 </div></section>
+{% set next_events = {"mehendi": ("sangeet", "Sangeet"), "sangeet": ("haldi", "Haldi"), "haldi": ("wedding", "Wedding Ceremony")} %}
+{% if page_key in next_events %}
+<section class="grandparents-rope-wrap event-rope-wrap" aria-label="Continue to the next celebration">
+  <p class="rope-instruction">Pull the golden thread to continue the celebration</p>
+  <a class="grandparents-rope page-turn-thread" href="{{ url_for('event_page', event_key=next_events[page_key][0]) if next_events[page_key][0] != 'wedding' else url_for('wedding_page') }}" aria-label="Pull the golden thread to continue to {{ next_events[page_key][1] }}">
+    <span class="rope-emblem" aria-hidden="true">✦</span>
+    <span>Continue to {{ next_events[page_key][1] }}</span>
+    <span class="rope-arrow" aria-hidden="true">→</span>
+  </a>
+</section>
+{% elif page_key == "wedding" %}
+<section class="grandparents-rope-wrap event-rope-wrap" aria-label="Continue to RSVP">
+  <p class="rope-instruction">Pull the golden thread to send your blessings</p>
+  <a class="grandparents-rope page-turn-thread" href="{{ url_for('rsvp') }}" aria-label="Pull the golden thread to RSVP">
+    <span class="rope-emblem" aria-hidden="true">✦</span>
+    <span>RSVP</span>
+    <span class="rope-arrow" aria-hidden="true">→</span>
+  </a>
+</section>
+{% endif %}
 {% endblock %}
